@@ -1,0 +1,3 @@
+<linker>
+    <assembly fullname="SystemsR3" preserve="all"/>
+</linker>

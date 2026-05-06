@@ -17,6 +17,7 @@ public class EcsR3IterationApplication : EcsR3ApplicationBehaviour
 {
     protected override void StartSystems()
     {
+        // Debug.Log("EcsR3IterationApplication StartSystems");
         this.BindAndStartSystem<EcsR3IterationSystem>();
     }
 
@@ -75,6 +76,7 @@ public class EcsR3IterationSystem : IManualSystem
 
     public void StartSystem()
     {
+        // Debug.Log($"EcsR3IterationApplication StartSystem ENTITY_COUNT:{BenchmarkEcsR3.ENTITY_COUNT}");
         for (int i = 0; i < BenchmarkEcsR3.ENTITY_COUNT; i++)
         {
             var entity = EntityCollection.Create();
@@ -99,6 +101,10 @@ public class EcsR3IterationSystem : IManualSystem
             EntityComponentAccessor.GetComponentRef<EcsR3Test.TestComponent1>(entity).Test++;
             EntityComponentAccessor.GetComponentRef<EcsR3Test.TestComponent2>(entity).Test++;
             EntityComponentAccessor.GetComponentRef<EcsR3Test.TestComponent3>(entity).Test++;
+            // if (entity.Id == 999)
+            // {
+            //     Debug.Log($"OnUpdate Test:{EntityComponentAccessor.GetComponentRef<EcsR3Test.TestComponent3>(entity).Test}");
+            // }
         }
     }
 

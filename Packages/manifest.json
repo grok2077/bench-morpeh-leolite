@@ -11,6 +11,7 @@
     "com.unity.timeline": "1.8.10",
     "com.unity.ugui": "2.0.0",
     "com.unity.visualscripting": "1.9.9",
+    "com.yasirkula.ingamedebugconsole": "https://github.com/yasirkula/UnityIngameDebugConsole.git",
     "ru.leopotam.ecsproto": "https://gitverse.ru/leopotam/ecsproto.git",
     "ru.leopotam.ecsproto-qol": "https://gitverse.ru/leopotam/ecsproto-qol.git",
     "ru.leopotam.ecsproto.unity": "https://gitverse.ru/leopotam/ecsproto.unity.git",

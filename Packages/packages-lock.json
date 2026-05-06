@@ -161,6 +161,13 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.yasirkula.ingamedebugconsole": {
+      "version": "https://github.com/yasirkula/UnityIngameDebugConsole.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "01a3260c652ffe766a40580c0972cf496f258b1c"
+    },
     "ru.leopotam.ecsproto": {
       "version": "https://gitverse.ru/leopotam/ecsproto.git",
       "depth": 0,
