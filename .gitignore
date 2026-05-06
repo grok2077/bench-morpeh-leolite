@@ -43,3 +43,6 @@ Library
 Logs
 *.csproj
 *.sln
+
+/.utmp
+/Demo

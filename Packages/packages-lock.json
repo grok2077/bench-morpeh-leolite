@@ -1,18 +1,41 @@
 {
   "dependencies": {
+    "com.cysharp.r3": {
+      "version": "https://github.com/Cysharp/R3.git?path=src/R3.Unity/Assets/R3.Unity",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.modules.imgui": "1.0.0"
+      },
+      "hash": "dc69078430149db8cd93069f502cefe148745b4b"
+    },
+    "com.dcfa_pixels.dragonecs": {
+      "version": "https://github.com/DCFApixels/DragonECS.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "4f28618277cc00fe47ae5438811028848268b51a"
+    },
+    "com.github-glitchenzo.nugetforunity": {
+      "version": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "acc1c7bc9ea34c33b830e40316fca52553878d29"
+    },
     "com.leopotam.ecslite": {
       "version": "https://github.com/Leopotam/ecslite.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "984856664a3ae7cff5b8a16eb7ab26ec02cb47d5"
+      "hash": "d46f3b209ea163810823aeea7d2610d38ad6cdf8"
     },
     "com.scellecs.morpeh": {
-      "version": "https://github.com/scellecs/morpeh.git?path=Scellecs.Morpeh#2024.1.0-rc38",
+      "version": "https://github.com/scellecs/morpeh.git?path=Scellecs.Morpeh",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "3472c94fb58d6e5caba2f4cea08d1b131fa3bdf1"
+      "hash": "7bcaf7845e667e9aec397ad97911ba2c5a28a296"
     },
     "com.unity.collab-proxy": {
       "version": "2.11.2",
@@ -137,6 +160,27 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "ru.leopotam.ecsproto": {
+      "version": "https://gitverse.ru/leopotam/ecsproto.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "f4ce0e9300446547ce8e213318909fcecddc867b"
+    },
+    "ru.leopotam.ecsproto-qol": {
+      "version": "https://gitverse.ru/leopotam/ecsproto-qol.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "8bc08acba192dd1bd2e45fee6df85704466f439e"
+    },
+    "ru.leopotam.ecsproto.unity": {
+      "version": "https://gitverse.ru/leopotam/ecsproto.unity.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "25706dfcd3017cfd43d2ae7cfb8b2da1465d50e0"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
