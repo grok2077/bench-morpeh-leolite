@@ -48,4 +48,34 @@ public class BenchmarkEcsR3 : MonoBehaviour
         go.AddComponent<EcsR3TripleMigrationApplication>();
         go.SetActive(true);
     }
+    
+    public void IterationBatchedTest(int entitiesCount)
+    {
+        ENTITY_COUNT  = entitiesCount;
+        var go = new GameObject();
+        go.SetActive(false);
+        go.AddComponent<SceneContext>();
+        go.AddComponent<EcsR3IterationBatchedApplication>();
+        go.SetActive(true);
+    }
+
+    public void SingleMigrationBatchedTest(int entitiesCount)
+    {
+        ENTITY_COUNT  = entitiesCount;
+        var go = new GameObject();
+        go.SetActive(false);
+        go.AddComponent<SceneContext>();
+        go.AddComponent<EcsR3SingleMigrationBatchedApplication>();
+        go.SetActive(true);
+    }
+
+    public void TripleMigrationBatchedTest(int entitiesCount)
+    {
+        ENTITY_COUNT  = entitiesCount;
+        var go = new GameObject();
+        go.SetActive(false);
+        go.AddComponent<SceneContext>();
+        go.AddComponent<EcsR3TripleMigrationBatchedApplication>();
+        go.SetActive(true);
+    }
 }

@@ -117,6 +117,24 @@ public class Runner : MonoBehaviour
         rootOverlay.SetActive(false);
         ecsr3.TripleMigrationTest(int.Parse(inputField.text));
     }
+    
+    public void EcsR3IterationBatched()
+    {
+        rootOverlay.SetActive(false);
+        ecsr3.IterationBatchedTest(int.Parse(inputField.text));
+    }
+    
+    public void EcsR3SingleMigrationBatched()
+    {
+        rootOverlay.SetActive(false);
+        ecsr3.SingleMigrationBatchedTest(int.Parse(inputField.text));
+    }
+    
+    public void EcsR3TripleMigrationBatched()
+    {
+        rootOverlay.SetActive(false);
+        ecsr3.TripleMigrationBatchedTest(int.Parse(inputField.text));
+    }
 }
 
 #if ENABLE_IL2CPP
