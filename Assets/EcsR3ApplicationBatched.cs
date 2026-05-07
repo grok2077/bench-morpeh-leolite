@@ -173,7 +173,8 @@ public class EcsR3IterationBatchedSystem
         component1.Test++;
         component2.Test++;
         component3.Test++;
-        // Debug.Log($"Test : {component3.Test}");
+        // Debug.Log($"Time.frameCount : {Time.frameCount}");
+        // Debug.Log($"Time.frameCount : {Time.frameCount}  EntityId : {entity.Id}  TestCount : {component3.Test}");
     }
 }
 
@@ -216,6 +217,8 @@ public class EcsR3SingleMigrationBatchedSystem
     {
         EntityComponentAccessor.RemoveComponent<EcsR3Test.TestComponent3>(entity);
         EntityComponentAccessor.AddComponent(entity, new EcsR3Test.TestComponent3());
+        // Debug.Log($"Time.frameCount : {Time.frameCount}");
+        // Debug.Log($"Time.frameCount : {Time.frameCount}  EntityId : {entity.Id}");
     }
 }
 
@@ -268,5 +271,7 @@ public class EcsR3TripleMigrationBatchedSystem
             new EcsR3Test.TestComponent2(),
             new EcsR3Test.TestComponent3()
         );
+        // Debug.Log($"Time.frameCount : {Time.frameCount}");
+        // Debug.Log($"Time.frameCount : {Time.frameCount}  EntityId : {entity.Id}");
     }
 }
