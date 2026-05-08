@@ -20,6 +20,19 @@ using Test;
 using UnityEngine;
 using Zenject;
 
+public class EcsR3ApplicationBatched : EcsR3ApplicationBehaviour
+{
+    protected override void ApplicationStarted()
+    {
+        Debug.Log("EcsR3ApplicationBatched Started");
+    }
+
+    protected override void BindSystems()
+    {
+        // manual Bind Systems
+    }
+}
+
 public class EcsR3IterationBatchedApplication : EcsR3ApplicationBehaviour
 {
     public override ComponentDatabaseConfig OverrideComponentDatabaseConfig()
