@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using EcsR3.Collections.Entities;
+using EcsR3.Components.Database;
 using EcsR3.Entities;
 using EcsR3.Entities.Accessors;
 using EcsR3.Extensions;
@@ -8,6 +9,7 @@ using EcsR3.Groups;
 using EcsR3.Zenject;
 using R3;
 using SystemsR3.Infrastructure.Extensions;
+using SystemsR3.Pools.Config;
 using SystemsR3.Systems.Conventional;
 using Test;
 using UnityEngine;
@@ -15,6 +17,20 @@ using Zenject;
 
 public class EcsR3IterationApplication : EcsR3ApplicationBehaviour
 {
+    public override ComponentDatabaseConfig OverrideComponentDatabaseConfig()
+    {
+        return new ComponentDatabaseConfig()
+        {
+            PoolSpecificConfig =
+            {
+                { typeof(EcsR3Test.TestComponent0), new PoolConfig(BenchmarkEcsR3.ENTITY_COUNT) },
+                { typeof(EcsR3Test.TestComponent1), new PoolConfig(BenchmarkEcsR3.ENTITY_COUNT) },
+                { typeof(EcsR3Test.TestComponent2), new PoolConfig(BenchmarkEcsR3.ENTITY_COUNT) },
+                { typeof(EcsR3Test.TestComponent3), new PoolConfig(BenchmarkEcsR3.ENTITY_COUNT) },
+            },
+        };
+    }
+
     protected override void StartSystems()
     {
         // Debug.Log("EcsR3IterationApplication StartSystems");
@@ -26,6 +42,20 @@ public class EcsR3IterationApplication : EcsR3ApplicationBehaviour
 
 public class EcsR3SingleMigrationApplication : EcsR3ApplicationBehaviour
 {
+    public override ComponentDatabaseConfig OverrideComponentDatabaseConfig()
+    {
+        return new ComponentDatabaseConfig()
+        {
+            PoolSpecificConfig =
+            {
+                { typeof(EcsR3Test.TestComponent0), new PoolConfig(BenchmarkEcsR3.ENTITY_COUNT) },
+                { typeof(EcsR3Test.TestComponent1), new PoolConfig(BenchmarkEcsR3.ENTITY_COUNT) },
+                { typeof(EcsR3Test.TestComponent2), new PoolConfig(BenchmarkEcsR3.ENTITY_COUNT) },
+                { typeof(EcsR3Test.TestComponent3), new PoolConfig(BenchmarkEcsR3.ENTITY_COUNT) },
+            },
+        };
+    }
+
     protected override void StartSystems()
     {
         this.BindAndStartSystem<EcsR3SingleMigrationSystem>();
@@ -36,6 +66,20 @@ public class EcsR3SingleMigrationApplication : EcsR3ApplicationBehaviour
 
 public class EcsR3TripleMigrationApplication : EcsR3ApplicationBehaviour
 {
+    public override ComponentDatabaseConfig OverrideComponentDatabaseConfig()
+    {
+        return new ComponentDatabaseConfig()
+        {
+            PoolSpecificConfig =
+            {
+                { typeof(EcsR3Test.TestComponent0), new PoolConfig(BenchmarkEcsR3.ENTITY_COUNT) },
+                { typeof(EcsR3Test.TestComponent1), new PoolConfig(BenchmarkEcsR3.ENTITY_COUNT) },
+                { typeof(EcsR3Test.TestComponent2), new PoolConfig(BenchmarkEcsR3.ENTITY_COUNT) },
+                { typeof(EcsR3Test.TestComponent3), new PoolConfig(BenchmarkEcsR3.ENTITY_COUNT) },
+            },
+        };
+    }
+
     protected override void StartSystems()
     {
         this.BindAndStartSystem<EcsR3TripleMigrationSystem>();
@@ -77,17 +121,13 @@ public class EcsR3IterationSystem : IManualSystem
     public void StartSystem()
     {
         // Debug.Log($"EcsR3IterationApplication StartSystem ENTITY_COUNT:{BenchmarkEcsR3.ENTITY_COUNT}");
-        for (int i = 0; i < BenchmarkEcsR3.ENTITY_COUNT; i++)
-        {
-            var entity = EntityCollection.Create();
-            EntityComponentAccessor.AddComponents(
-                entity,
-                new EcsR3Test.TestComponent0(),
-                new EcsR3Test.TestComponent1(),
-                new EcsR3Test.TestComponent2(),
-                new EcsR3Test.TestComponent3()
-            );
-        }
+        var entities = EntityCollection.CreateMany(BenchmarkEcsR3.ENTITY_COUNT);
+        EntityComponentAccessor.CreateComponents<
+            EcsR3Test.TestComponent0,
+            EcsR3Test.TestComponent1,
+            EcsR3Test.TestComponent2,
+            EcsR3Test.TestComponent3
+        >(entities);
         _updateLoop = Observable.EveryUpdate().Subscribe(OnUpdate);
     }
 
@@ -145,17 +185,13 @@ public class EcsR3SingleMigrationSystem : IManualSystem
 
     public void StartSystem()
     {
-        for (int i = 0; i < BenchmarkEcsR3.ENTITY_COUNT; i++)
-        {
-            var entity = EntityCollection.Create();
-            EntityComponentAccessor.AddComponents(
-                entity,
-                new EcsR3Test.TestComponent0(),
-                new EcsR3Test.TestComponent1(),
-                new EcsR3Test.TestComponent2(),
-                new EcsR3Test.TestComponent3()
-            );
-        }
+        var entities = EntityCollection.CreateMany(BenchmarkEcsR3.ENTITY_COUNT);
+        EntityComponentAccessor.CreateComponents<
+            EcsR3Test.TestComponent0,
+            EcsR3Test.TestComponent1,
+            EcsR3Test.TestComponent2,
+            EcsR3Test.TestComponent3
+        >(entities);
         _updateLoop = Observable
             .EveryUpdate()
             .Subscribe(x =>
@@ -212,17 +248,13 @@ public class EcsR3TripleMigrationSystem : IManualSystem
 
     public void StartSystem()
     {
-        for (int i = 0; i < BenchmarkEcsR3.ENTITY_COUNT; i++)
-        {
-            var entity = EntityCollection.Create();
-            EntityComponentAccessor.AddComponents(
-                entity,
-                new EcsR3Test.TestComponent0(),
-                new EcsR3Test.TestComponent1(),
-                new EcsR3Test.TestComponent2(),
-                new EcsR3Test.TestComponent3()
-            );
-        }
+        var entities = EntityCollection.CreateMany(BenchmarkEcsR3.ENTITY_COUNT);
+        EntityComponentAccessor.CreateComponents<
+            EcsR3Test.TestComponent0,
+            EcsR3Test.TestComponent1,
+            EcsR3Test.TestComponent2,
+            EcsR3Test.TestComponent3
+        >(entities);
         _updateLoop = Observable
             .EveryUpdate()
             .Subscribe(x =>

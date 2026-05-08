@@ -88,17 +88,13 @@ public class EcsR3SingleMigrationBatchedApplication : EcsR3ApplicationBehaviour
 
     protected override void ApplicationStarted()
     {
-        for (var i = 0; i < BenchmarkEcsR3.ENTITY_COUNT; i++)
-        {
-            var entity = EntityCollection.Create();
-            EntityComponentAccessor.AddComponents(
-                entity,
-                new EcsR3Test.TestComponent0(),
-                new EcsR3Test.TestComponent1(),
-                new EcsR3Test.TestComponent2(),
-                new EcsR3Test.TestComponent3()
-            );
-        }
+        var entities = EntityCollection.CreateMany(BenchmarkEcsR3.ENTITY_COUNT);
+        EntityComponentAccessor.CreateComponents<
+            EcsR3Test.TestComponent0,
+            EcsR3Test.TestComponent1,
+            EcsR3Test.TestComponent2,
+            EcsR3Test.TestComponent3
+        >(entities);
     }
 }
 
@@ -125,17 +121,13 @@ public class EcsR3TripleMigrationBatchedApplication : EcsR3ApplicationBehaviour
 
     protected override void ApplicationStarted()
     {
-        for (var i = 0; i < BenchmarkEcsR3.ENTITY_COUNT; i++)
-        {
-            var entity = EntityCollection.Create();
-            EntityComponentAccessor.AddComponents(
-                entity,
-                new EcsR3Test.TestComponent0(),
-                new EcsR3Test.TestComponent1(),
-                new EcsR3Test.TestComponent2(),
-                new EcsR3Test.TestComponent3()
-            );
-        }
+        var entities = EntityCollection.CreateMany(BenchmarkEcsR3.ENTITY_COUNT);
+        EntityComponentAccessor.CreateComponents<
+            EcsR3Test.TestComponent0,
+            EcsR3Test.TestComponent1,
+            EcsR3Test.TestComponent2,
+            EcsR3Test.TestComponent3
+        >(entities);
     }
 }
 
