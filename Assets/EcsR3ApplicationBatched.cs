@@ -224,7 +224,8 @@ public class EcsR3SingleMigrationBatchedSystem
         // var c = pool.Get(index);
 
         EntityComponentAccessor.RemoveComponent<EcsR3Test.TestComponent3>(entity);
-        EntityComponentAccessor.AddComponent(entity, new EcsR3Test.TestComponent3());
+        // EntityComponentAccessor.AddComponent(entity, new EcsR3Test.TestComponent3());
+        EntityComponentAccessor.CreateComponent<EcsR3Test.TestComponent3>(entity);
         // EntityComponentAccessor.AddComponent(entity, c);
         // Debug.Log($"Time.frameCount : {Time.frameCount}");
         // Debug.Log($"Time.frameCount : {Time.frameCount}  EntityId : {entity.Id}");
@@ -274,12 +275,11 @@ public class EcsR3TripleMigrationBatchedSystem
             typeof(EcsR3Test.TestComponent2),
             typeof(EcsR3Test.TestComponent3)
         );
-        EntityComponentAccessor.AddComponents(
-            entity,
-            new EcsR3Test.TestComponent1(),
-            new EcsR3Test.TestComponent2(),
-            new EcsR3Test.TestComponent3()
-        );
+        EntityComponentAccessor.CreateComponents<
+            EcsR3Test.TestComponent1,
+            EcsR3Test.TestComponent2,
+            EcsR3Test.TestComponent3
+        >(entity);
         // Debug.Log($"Time.frameCount : {Time.frameCount}");
         // Debug.Log($"Time.frameCount : {Time.frameCount}  EntityId : {entity.Id}");
     }

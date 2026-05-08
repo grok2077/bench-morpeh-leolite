@@ -206,7 +206,7 @@ public class EcsR3SingleMigrationSystem : IManualSystem
                     var entity in EntityCollection.MatchingGroup(EntityComponentAccessor, Group0)
                 )
                 {
-                    EntityComponentAccessor.AddComponent(entity, new EcsR3Test.TestComponent3());
+                    EntityComponentAccessor.CreateComponent<EcsR3Test.TestComponent3>(entity);
                 }
             });
     }
@@ -274,12 +274,11 @@ public class EcsR3TripleMigrationSystem : IManualSystem
                     var entity in EntityCollection.MatchingGroup(EntityComponentAccessor, Group0)
                 )
                 {
-                    EntityComponentAccessor.AddComponents(
-                        entity,
-                        new EcsR3Test.TestComponent1(),
-                        new EcsR3Test.TestComponent2(),
-                        new EcsR3Test.TestComponent3()
-                    );
+                    EntityComponentAccessor.CreateComponents<
+                        EcsR3Test.TestComponent1,
+                        EcsR3Test.TestComponent2,
+                        EcsR3Test.TestComponent3
+                    >(entity);
                 }
             });
     }
