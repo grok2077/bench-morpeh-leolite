@@ -44,17 +44,24 @@ public class EcsR3IterationBatchedApplication : EcsR3ApplicationBehaviour
 
     protected override void ApplicationStarted()
     {
-        for (var i = 0; i < BenchmarkEcsR3.ENTITY_COUNT; i++)
-        {
-            var entity = EntityCollection.Create();
-            EntityComponentAccessor.AddComponents(
-                entity,
-                new EcsR3Test.TestComponent0(),
-                new EcsR3Test.TestComponent1(),
-                new EcsR3Test.TestComponent2(),
-                new EcsR3Test.TestComponent3()
-            );
-        }
+        var entities = EntityCollection.CreateMany(BenchmarkEcsR3.ENTITY_COUNT);
+        EntityComponentAccessor.CreateComponents<
+            EcsR3Test.TestComponent0,
+            EcsR3Test.TestComponent1,
+            EcsR3Test.TestComponent2,
+            EcsR3Test.TestComponent3
+        >(entities);
+        // for (var i = 0; i < BenchmarkEcsR3.ENTITY_COUNT; i++)
+        // {
+        //     var entity = EntityCollection.Create();
+        //     EntityComponentAccessor.AddComponents(
+        //         entity,
+        //         new EcsR3Test.TestComponent0(),
+        //         new EcsR3Test.TestComponent1(),
+        //         new EcsR3Test.TestComponent2(),
+        //         new EcsR3Test.TestComponent3()
+        //     );
+        // }
     }
 }
 
@@ -73,7 +80,7 @@ public class EcsR3SingleMigrationBatchedApplication : EcsR3ApplicationBehaviour
             },
         };
     }
-    
+
     protected override void StartSystems()
     {
         this.BindAndStartSystem<EcsR3SingleMigrationBatchedSystem>();
@@ -110,7 +117,7 @@ public class EcsR3TripleMigrationBatchedApplication : EcsR3ApplicationBehaviour
             },
         };
     }
-    
+
     protected override void StartSystems()
     {
         this.BindAndStartSystem<EcsR3TripleMigrationBatchedSystem>();
@@ -215,8 +222,18 @@ public class EcsR3SingleMigrationBatchedSystem
         EcsR3Test.TestComponent3 component3
     )
     {
+        // // EcsR3.Components.ComponentPool<>
+        // var pool = this.ComponentDatabase.GetPoolFor<EcsR3Test.TestComponent3>();
+        // var eca = (EcsR3.Entities.Accessors.EntityComponentAccessor)EntityComponentAccessor;
+        // var ead = (EcsR3.Collections.Entities.EntityAllocationDatabase)eca.EntityAllocationDatabase;
+        // var ctl = (EcsR3.Components.Lookups.ComponentTypeLookup)eca.ComponentTypeLookup;
+        // var componentTypeId = ctl.GetComponentTypeId(typeof(EcsR3Test.TestComponent3));
+        // var index = ead.ComponentAllocationData[componentTypeId, entity.Id];
+        // var c = pool.Get(index);
+
         EntityComponentAccessor.RemoveComponent<EcsR3Test.TestComponent3>(entity);
         EntityComponentAccessor.AddComponent(entity, new EcsR3Test.TestComponent3());
+        // EntityComponentAccessor.AddComponent(entity, c);
         // Debug.Log($"Time.frameCount : {Time.frameCount}");
         // Debug.Log($"Time.frameCount : {Time.frameCount}  EntityId : {entity.Id}");
     }
