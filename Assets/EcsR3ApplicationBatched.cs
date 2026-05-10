@@ -1,37 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using EcsR3.Collections.Entities;
+using System.Reflection;
 using EcsR3.Components.Database;
+using EcsR3.Components.Lookups;
 using EcsR3.Computeds.Components.Registries;
 using EcsR3.Entities;
 using EcsR3.Entities.Accessors;
 using EcsR3.Extensions;
-using EcsR3.Groups;
-using EcsR3.Plugins.Views.Components;
 using EcsR3.Systems.Batching.Convention;
 using EcsR3.Zenject;
 using R3;
 using SystemsR3.Infrastructure.Extensions;
 using SystemsR3.Pools.Config;
-using SystemsR3.Systems.Conventional;
 using SystemsR3.Threading;
 using Test;
-using UnityEngine;
-using Zenject;
-
-public class EcsR3ApplicationBatched : EcsR3ApplicationBehaviour
-{
-    protected override void ApplicationStarted()
-    {
-        Debug.Log("EcsR3ApplicationBatched Started");
-    }
-
-    protected override void BindSystems()
-    {
-        // manual Bind Systems
-    }
-}
 
 public class EcsR3IterationBatchedApplication : EcsR3ApplicationBehaviour
 {
@@ -49,6 +32,13 @@ public class EcsR3IterationBatchedApplication : EcsR3ApplicationBehaviour
         };
     }
 
+    protected override void LoadModules()
+    {
+        base.LoadModules();
+        DependencyRegistry.Unbind<IComponentTypeAssigner>();
+        DependencyRegistry.Bind<IComponentTypeAssigner, CustomComponentTypeAssigner>();
+    }
+
     protected override void StartSystems()
     {
         // Debug.Log("EcsR3IterationApplicationBatched StartSystems");
@@ -57,6 +47,9 @@ public class EcsR3IterationBatchedApplication : EcsR3ApplicationBehaviour
 
     protected override void ApplicationStarted()
     {
+        // var eca = (EcsR3.Entities.Accessors.EntityComponentAccessor)EntityComponentAccessor;
+        // var ead = (EcsR3.Collections.Entities.EntityAllocationDatabase)eca.EntityAllocationDatabase;
+        // ead.PreAllocate(BenchmarkEcsR3.ENTITY_COUNT);
         var entities = EntityCollection.CreateMany(BenchmarkEcsR3.ENTITY_COUNT);
         EntityComponentAccessor.CreateComponents<
             EcsR3Test.TestComponent0,
@@ -94,6 +87,13 @@ public class EcsR3SingleMigrationBatchedApplication : EcsR3ApplicationBehaviour
         };
     }
 
+    protected override void LoadModules()
+    {
+        base.LoadModules();
+        DependencyRegistry.Unbind<IComponentTypeAssigner>();
+        DependencyRegistry.Bind<IComponentTypeAssigner, CustomComponentTypeAssigner>();
+    }
+
     protected override void StartSystems()
     {
         this.BindAndStartSystem<EcsR3SingleMigrationBatchedSystem>();
@@ -125,6 +125,13 @@ public class EcsR3TripleMigrationBatchedApplication : EcsR3ApplicationBehaviour
                 { typeof(EcsR3Test.TestComponent3), new PoolConfig(BenchmarkEcsR3.ENTITY_COUNT) },
             },
         };
+    }
+
+    protected override void LoadModules()
+    {
+        base.LoadModules();
+        DependencyRegistry.Unbind<IComponentTypeAssigner>();
+        DependencyRegistry.Bind<IComponentTypeAssigner, CustomComponentTypeAssigner>();
     }
 
     protected override void StartSystems()
@@ -295,5 +302,37 @@ public class EcsR3TripleMigrationBatchedSystem
         >(entity);
         // Debug.Log($"Time.frameCount : {Time.frameCount}");
         // Debug.Log($"Time.frameCount : {Time.frameCount}  EntityId : {entity.Id}");
+    }
+}
+
+public class CustomComponentTypeAssigner : IComponentTypeAssigner
+{
+    public IEnumerable<Type> GetAllComponentTypes()
+    {
+        string[] assemblyShortNames = new string[] { "Assembly-CSharp" };
+        var assemblies = assemblyShortNames.Select(Assembly.Load);
+        Type componentType = typeof(EcsR3.Components.IComponent);
+        return ((IEnumerable<Assembly>)assemblies)
+            .SelectMany<Assembly, Type>(
+                (Func<Assembly, IEnumerable<Type>>)(s => (IEnumerable<Type>)s.GetTypes())
+            )
+            .Where<Type>(
+                (Func<Type, bool>)(
+                    p => componentType.IsAssignableFrom(p) && !p.IsInterface && !p.IsAbstract
+                )
+            );
+    }
+
+    public IReadOnlyDictionary<Type, int> GenerateComponentLookups()
+    {
+        int lookupId = 0;
+        IEnumerable<Type> allComponentTypes = this.GetAllComponentTypes();
+        return allComponentTypes == null
+            ? (IReadOnlyDictionary<Type, int>)null
+            : (IReadOnlyDictionary<Type, int>)
+                allComponentTypes.ToDictionary<Type, Type, int>(
+                    (Func<Type, Type>)(x => x),
+                    (Func<Type, int>)(_ => lookupId++)
+                );
     }
 }
