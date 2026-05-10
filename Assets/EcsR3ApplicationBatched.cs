@@ -11,8 +11,10 @@ using EcsR3.Extensions;
 using EcsR3.Systems.Batching.Convention;
 using EcsR3.Zenject;
 using R3;
+using SystemsR3.Infrastructure.Dependencies;
 using SystemsR3.Infrastructure.Extensions;
 using SystemsR3.Pools.Config;
+using SystemsR3.Systems;
 using SystemsR3.Threading;
 using Test;
 
@@ -37,6 +39,42 @@ public class EcsR3IterationBatchedApplication : EcsR3ApplicationBehaviour
         base.LoadModules();
         DependencyRegistry.Unbind<IComponentTypeAssigner>();
         DependencyRegistry.Bind<IComponentTypeAssigner, CustomComponentTypeAssigner>();
+    }
+
+    protected override void BindSystems()
+    {
+        // string str = this.GetType().Namespace;
+        // string[] namespaces = new string[2] { str + ".Systems", str + ".ViewResolvers" };
+        // List<Type> list = ((IEnumerable<Assembly>)AppDomain.CurrentDomain.GetAssemblies())
+        //     .SelectMany<Assembly, Type>(
+        //         (Func<Assembly, IEnumerable<Type>>)(x => (IEnumerable<Type>)x.GetTypes())
+        //     )
+        //     .Where<Type>(
+        //         (Func<Type, bool>)(
+        //             x =>
+        //                 !x.IsInterface
+        //                 && !x.IsAbstract
+        //                 && !string.IsNullOrEmpty(x.Namespace)
+        //                 && typeof(ISystem).IsAssignableFrom(x)
+        //                 && ((IEnumerable<string>)namespaces).Any<string>(
+        //                     (Func<string, bool>)(
+        //                         namespaceToVerify => x.Namespace.Contains(namespaceToVerify)
+        //                     )
+        //                 )
+        //         )
+        //     )
+        //     .ToList<Type>();
+        // if (!list.Any<Type>())
+        //     return;
+        // foreach (Type systemType in list)
+        // {
+        //     BindingConfiguration configuration = new BindingConfiguration()
+        //     {
+        //         AsSingleton = true,
+        //         WithName = systemType.Name,
+        //     };
+        //     this.DependencyRegistry.Bind(typeof(ISystem), systemType, configuration);
+        // }
     }
 
     protected override void StartSystems()
@@ -94,6 +132,8 @@ public class EcsR3SingleMigrationBatchedApplication : EcsR3ApplicationBehaviour
         DependencyRegistry.Bind<IComponentTypeAssigner, CustomComponentTypeAssigner>();
     }
 
+    protected override void BindSystems() { }
+
     protected override void StartSystems()
     {
         this.BindAndStartSystem<EcsR3SingleMigrationBatchedSystem>();
@@ -133,6 +173,8 @@ public class EcsR3TripleMigrationBatchedApplication : EcsR3ApplicationBehaviour
         DependencyRegistry.Unbind<IComponentTypeAssigner>();
         DependencyRegistry.Bind<IComponentTypeAssigner, CustomComponentTypeAssigner>();
     }
+
+    protected override void BindSystems() { }
 
     protected override void StartSystems()
     {

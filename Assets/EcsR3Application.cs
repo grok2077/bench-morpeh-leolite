@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using EcsR3.Collections.Entities;
 using EcsR3.Components.Database;
+using EcsR3.Components.Lookups;
 using EcsR3.Entities;
 using EcsR3.Entities.Accessors;
 using EcsR3.Extensions;
@@ -31,6 +32,15 @@ public class EcsR3IterationApplication : EcsR3ApplicationBehaviour
         };
     }
 
+    protected override void LoadModules()
+    {
+        base.LoadModules();
+        DependencyRegistry.Unbind<IComponentTypeAssigner>();
+        DependencyRegistry.Bind<IComponentTypeAssigner, CustomComponentTypeAssigner>();
+    }
+
+    protected override void BindSystems() { }
+
     protected override void StartSystems()
     {
         // Debug.Log("EcsR3IterationApplication StartSystems");
@@ -56,6 +66,15 @@ public class EcsR3SingleMigrationApplication : EcsR3ApplicationBehaviour
         };
     }
 
+    protected override void LoadModules()
+    {
+        base.LoadModules();
+        DependencyRegistry.Unbind<IComponentTypeAssigner>();
+        DependencyRegistry.Bind<IComponentTypeAssigner, CustomComponentTypeAssigner>();
+    }
+
+    protected override void BindSystems() { }
+
     protected override void StartSystems()
     {
         this.BindAndStartSystem<EcsR3SingleMigrationSystem>();
@@ -79,6 +98,15 @@ public class EcsR3TripleMigrationApplication : EcsR3ApplicationBehaviour
             },
         };
     }
+
+    protected override void LoadModules()
+    {
+        base.LoadModules();
+        DependencyRegistry.Unbind<IComponentTypeAssigner>();
+        DependencyRegistry.Bind<IComponentTypeAssigner, CustomComponentTypeAssigner>();
+    }
+
+    protected override void BindSystems() { }
 
     protected override void StartSystems()
     {
