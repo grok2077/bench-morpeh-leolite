@@ -7,14 +7,13 @@ using EcsR3.Entities;
 using EcsR3.Entities.Accessors;
 using EcsR3.Extensions;
 using EcsR3.Groups;
-using EcsR3.Zenject;
+using EcsR3.Reflex;
 using R3;
 using SystemsR3.Infrastructure.Extensions;
 using SystemsR3.Pools.Config;
 using SystemsR3.Systems.Conventional;
 using Test;
 using UnityEngine;
-using Zenject;
 
 public class EcsR3IterationApplication : EcsR3ApplicationBehaviour
 {

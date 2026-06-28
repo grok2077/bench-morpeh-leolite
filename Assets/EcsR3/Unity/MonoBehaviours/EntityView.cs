@@ -1,7 +1,7 @@
 ﻿using EcsR3.Collections.Entities;
 using EcsR3.Entities;
 using EcsR3.Entities.Accessors;
-using Zenject;
+using Reflex.Attributes;
 
 namespace EcsR3.Unity.MonoBehaviours
 {

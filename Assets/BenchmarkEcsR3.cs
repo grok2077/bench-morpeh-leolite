@@ -3,12 +3,10 @@ using EcsR3.Collections.Entities;
 using EcsR3.Entities.Accessors;
 using EcsR3.Extensions;
 using EcsR3.Groups;
-using EcsR3.Zenject;
 using R3;
 using SystemsR3.Infrastructure.Extensions;
 using SystemsR3.Systems.Conventional;
 using UnityEngine;
-using Zenject;
 
 public class BenchmarkEcsR3 : MonoBehaviour
 {
@@ -24,7 +22,6 @@ public class BenchmarkEcsR3 : MonoBehaviour
         ENTITY_COUNT  = entitiesCount;
         var go = new GameObject();
         go.SetActive(false);
-        go.AddComponent<SceneContext>();
         go.AddComponent<EcsR3IterationApplication>();
         go.SetActive(true);
     }
@@ -34,7 +31,6 @@ public class BenchmarkEcsR3 : MonoBehaviour
         ENTITY_COUNT  = entitiesCount;
         var go = new GameObject();
         go.SetActive(false);
-        go.AddComponent<SceneContext>();
         go.AddComponent<EcsR3SingleMigrationApplication>();
         go.SetActive(true);
     }
@@ -44,7 +40,6 @@ public class BenchmarkEcsR3 : MonoBehaviour
         ENTITY_COUNT  = entitiesCount;
         var go = new GameObject();
         go.SetActive(false);
-        go.AddComponent<SceneContext>();
         go.AddComponent<EcsR3TripleMigrationApplication>();
         go.SetActive(true);
     }
@@ -54,7 +49,6 @@ public class BenchmarkEcsR3 : MonoBehaviour
         ENTITY_COUNT  = entitiesCount;
         var go = new GameObject();
         go.SetActive(false);
-        go.AddComponent<SceneContext>();
         go.AddComponent<EcsR3IterationBatchedApplication>();
         go.SetActive(true);
     }
@@ -64,7 +58,6 @@ public class BenchmarkEcsR3 : MonoBehaviour
         ENTITY_COUNT  = entitiesCount;
         var go = new GameObject();
         go.SetActive(false);
-        go.AddComponent<SceneContext>();
         go.AddComponent<EcsR3SingleMigrationBatchedApplication>();
         go.SetActive(true);
     }
@@ -74,7 +67,6 @@ public class BenchmarkEcsR3 : MonoBehaviour
         ENTITY_COUNT  = entitiesCount;
         var go = new GameObject();
         go.SetActive(false);
-        go.AddComponent<SceneContext>();
         go.AddComponent<EcsR3TripleMigrationBatchedApplication>();
         go.SetActive(true);
     }

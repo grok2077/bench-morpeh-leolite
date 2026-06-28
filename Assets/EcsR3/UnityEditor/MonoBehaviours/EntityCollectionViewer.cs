@@ -1,6 +1,6 @@
 ﻿using EcsR3.Collections.Entities;
+using Reflex.Attributes;
 using UnityEngine;
-using Zenject;
 
 namespace EcsR3.UnityEditor.MonoBehaviours
 {

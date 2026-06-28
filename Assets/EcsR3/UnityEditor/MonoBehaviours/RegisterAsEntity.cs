@@ -9,8 +9,8 @@ using EcsR3.Plugins.Views.Components;
 using EcsR3.Unity.MonoBehaviours;
 using EcsR3.UnityEditor.Data;
 using EcsR3.UnityEditor.Extensions;
+using Reflex.Attributes;
 using UnityEngine;
-using Zenject;
 
 namespace EcsR3.UnityEditor.MonoBehaviours
 {

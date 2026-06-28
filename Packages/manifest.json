@@ -3,6 +3,7 @@
     "com.cysharp.r3": "https://github.com/Cysharp/R3.git?path=src/R3.Unity/Assets/R3.Unity",
     "com.dcfa_pixels.dragonecs": "https://github.com/DCFApixels/DragonECS.git",
     "com.github-glitchenzo.nugetforunity": "https://github.com/GlitchEnzo/NuGetForUnity.git?path=/src/NuGetForUnity",
+    "com.gustavopsantos.reflex": "https://github.com/gustavopsantos/reflex.git?path=/Assets/Reflex",
     "com.leopotam.ecslite": "https://github.com/Leopotam/ecslite.git",
     "com.scellecs.morpeh": "https://github.com/scellecs/morpeh.git?path=Scellecs.Morpeh",
     "com.unity.collab-proxy": "2.11.2",

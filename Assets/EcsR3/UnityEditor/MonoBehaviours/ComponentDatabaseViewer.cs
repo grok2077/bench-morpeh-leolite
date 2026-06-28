@@ -1,7 +1,7 @@
 using EcsR3.Components.Database;
 using EcsR3.Components.Lookups;
+using Reflex.Attributes;
 using UnityEngine;
-using Zenject;
 
 namespace EcsR3.UnityEditor.MonoBehaviours
 {

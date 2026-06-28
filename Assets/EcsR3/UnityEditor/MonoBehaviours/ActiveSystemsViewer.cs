@@ -1,8 +1,8 @@
 using EcsR3.Collections;
 using EcsR3.Computeds.Entities.Registries;
+using Reflex.Attributes;
 using SystemsR3.Executor;
 using UnityEngine;
-using Zenject;
 
 namespace EcsR3.UnityEditor.MonoBehaviours
 {
