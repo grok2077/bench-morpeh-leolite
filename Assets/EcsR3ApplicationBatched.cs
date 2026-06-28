@@ -197,7 +197,7 @@ public class EcsR3TripleMigrationBatchedApplication : EcsR3ApplicationBehaviour
 [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
 public class EcsR3IterationBatchedSystem
-    : BatchedRefSystem<
+    : BatchedSystem<
         EcsR3Test.TestComponent0,
         EcsR3Test.TestComponent1,
         EcsR3Test.TestComponent2,
@@ -270,10 +270,10 @@ public class EcsR3SingleMigrationBatchedSystem
 
     protected override void Process(
         Entity entity,
-        EcsR3Test.TestComponent0 component0,
-        EcsR3Test.TestComponent1 component1,
-        EcsR3Test.TestComponent2 component2,
-        EcsR3Test.TestComponent3 component3
+        ref EcsR3Test.TestComponent0 component0,
+        ref EcsR3Test.TestComponent1 component1,
+        ref EcsR3Test.TestComponent2 component2,
+        ref EcsR3Test.TestComponent3 component3
     )
     {
         // // EcsR3.Components.ComponentPool<>
@@ -298,7 +298,7 @@ public class EcsR3SingleMigrationBatchedSystem
 [Il2CppSetOption(Option.DivideByZeroChecks, false)]
 [Il2CppSetOption(Option.ArrayBoundsChecks, false)]
 public class EcsR3TripleMigrationBatchedSystem
-    : BatchedRefSystem<
+    : BatchedSystem<
         EcsR3Test.TestComponent0,
         EcsR3Test.TestComponent1,
         EcsR3Test.TestComponent2,
